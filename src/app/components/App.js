@@ -25,14 +25,20 @@ export class App extends React.Component{
         var newHands = [];
         var hands = this.state.hands.length
         var size = event.target.value;
-       
-        if(size < minHands){
-            size = minHands;
-        }
+        if(size){
+            if(size.length > 1){
+                size = size[size.length-1];
+            }
+            if(size < minHands){
+                size = minHands;
+            }
+    
+            if(size > maxHands){
 
-        if(size > maxHands){
-            size = maxHands;
+                size = maxHands;
+            }
         }
+       
 
         for (var index = 0; index < size; index++) {           
             
@@ -75,7 +81,6 @@ export class App extends React.Component{
                         index={index} 
                         value={hand} 
                         onHandValueChange={this.onHandValueChange}/>);
-        console.log("Hands", Hands);
         return (
             <div className="container">
                 <Header/>  
