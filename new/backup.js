@@ -1,7 +1,7 @@
 const gravity = -9.8;
 var speedY = 0;
 var speedX = 0;
-var speed = 1000;
+var speed = 100;
 var angle = 37;
 var altitude = 0;
 var y = 0;
@@ -37,21 +37,21 @@ function init() {
     var seriesX = [];
     var seriesY = [];
 
-    var factor = dx/10;
+    var factor = ty*2;
+    var x = dx/factor;
+    for(let i = 0; i < factor + 1; i++){
+        gDx.push(parseInt(x*i));
+    }
 
-    for(let i = 0; i <= dx+1; i = i+factor){
-        gDx.push(parseInt(i));
-    }
-    
-    
     for(let i of gDx){
-        let t = parseFloat(i/speedX).toFixed(2);
-        seriesX.push(t);        
-        
-        seriesY.push(0+speedY*t+0.5*gravity*Math.pow(t, 2));
+        seriesX.push(parseFloat(i/speedX).toFixed(2));        
+    }
+
+    for(let i = 0; i<=ty*2; i++){
+        seriesY.push(0+speedY*i+0.5*gravity*Math.pow(i, 2));
     }
     
-    console.log("gDx", gDx);
+
     console.log("seriesX", seriesX);
     console.log("seriesY", seriesY);
     new Chartist.Line('#time', {
@@ -61,11 +61,6 @@ function init() {
 
       new Chartist.Line('#altitude', {
         labels: seriesX,
-        series: [seriesY]
-      });
-
-      new Chartist.Line('#altitude_distance', {
-        labels: gDx,
         series: [seriesY]
       });
 }
