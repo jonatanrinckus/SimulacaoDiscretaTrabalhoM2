@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class Hand extends React.Component{
+export class Player extends React.Component{
     render(){
         return (
             <div className="col-3" style={ {margin: "15px"} }>

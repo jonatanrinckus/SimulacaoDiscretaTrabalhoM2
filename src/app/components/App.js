@@ -1,7 +1,8 @@
 import React from 'react';
-import {Header} from './header/Header';
-import {Options} from './options/Options';
-import {Hand} from './hand/Hand';
+import { Header } from './header/Header';
+import { Options } from './options/Options';
+import { Player } from './player/Player';
+import { Hand } from 'pokersolver';
 
 const minHands = 2;
 const maxHands = 8;
@@ -77,7 +78,7 @@ export class App extends React.Component{
     render(){
         var hand = this.state.hands;
         var Hands = hand.map((hand, index) => 
-            <Hand key={index}
+            <Player key={index}
                         index={index} 
                         value={hand} 
                         onHandValueChange={this.onHandValueChange}/>);
@@ -91,7 +92,11 @@ export class App extends React.Component{
                 
 
                 <div className="row">{Hands}</div>
-                
+                <div className="row">
+                    <label>Table</label><br/>
+                    <input type="text"/>
+                </div>
+                <br/>
                 <div className="row">
                     <button className="btn btn-primary col-3" >Simular</button>
                 </div>
