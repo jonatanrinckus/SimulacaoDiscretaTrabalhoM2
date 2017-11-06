@@ -1,17 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="src/chartist.css">
+    <link rel="stylesheet" href="src/bootstrap.css">
 </head>
+
 <body>
-    <div class="ct-chart ct-golden-section" id="time"></div>
-    <div class="ct-chart ct-golden-section" id="altitude"></div>
-    <div class="ct-chart ct-golden-section" id="altitude_distance"></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-6">
+
+                <form>
+                    <div class="form-group">
+                        <label for="angle">Angle</label>
+                        <input type="number" class="form-control" id="angle" value="37">
+                    </div>
+                    <div class="form-group">
+                        <label for="speed">Initial Speed</label>
+                        <input type="number" class="form-control" id="speed" value="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="graph_speed">Graph Speed(ms)</label>
+                        <input type="number" class="form-control" id="graph_speed" value="500">
+                    </div>
+
+                    <button type="submit" onclick="go();" class="btn btn-primary">Go</button>
+                </form>
+            </div>
+            <canvas class="col-6" id="time"></canvas>
+            <canvas class="col-6" id="altitude"></canvas>
+            <canvas class="col-6" id="altitude_distance"></canvas>
+        </div>
+        <div >
+            
+                <div class="row">
+                        <label id="distance"></label>
+                    </div>
+                    <div class="row">
+                        <label id="height"></label>
+                    </div>
+                    <div class="row">
+                        <label id="time"></label>
+                    </div>
+        </div>
+
+    </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="src/bootstrap.js"></script>
 <script src="src/chartist.js"></script>
 <script src="index.js"></script>
+
 </html>
