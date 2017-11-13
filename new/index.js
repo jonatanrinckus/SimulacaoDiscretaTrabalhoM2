@@ -1,9 +1,8 @@
-const gravity = -9.8;
+var gravity = -9.8;
 var speedY = 0;
 var speedX = 0;
 var speed = 0;
 var angle = 0;
-var altitude = 0;
 var y = 0;
 
 function init() {
@@ -16,18 +15,47 @@ init()
 
 function go() {
 
-    angle = $("#angle").val();
-    speed = $("#speed").val();
+    angle = parseFloat($("#angle").val());
+    speed = parseFloat($("#speed").val());
+    gravity = parseFloat($("#gravity").val());
+    height = parseFloat($("#height").val());
+    if(angle <= 0){
+        alert("Angle cant be negative");
+        return;
+    }
+
+    if(gravity >= 0){
+        alert("Gravity cant be positive");
+        return;
+    }
+
     speedY = speed * (Math.sin(angle * (Math.PI / 180.0)));
     speedX = speed * (Math.cos(angle * (Math.PI / 180.0)));
 
     console.log("speedY", Math.abs(speedY));
     console.log("speedX", Math.abs(speedX));
 
+
+    var a = gravity/2;
+    var b = speedY;
+    var c = height;
+    var delta = Math.sqrt(Math.pow(b, 2)-4*a*c);
+
+    console.log("delta", delta);
+
+    var x1 = ((b*-1) + delta)/(2*a);
+    var x2 = ((b*-1) - delta)/(2*a);
+
+
+    console.log("x1", x1);
+    console.log("x2", x2);
+
     var ty = Math.abs(speedY / gravity);
     console.log("Ty", ty);
 
-    var tx = ty * 2;
+    tx = x1 < x2 ? x2 : x1;    
+
+    //var tx = ty * 2;
     console.log("Tx", tx);
 
 
@@ -35,8 +63,8 @@ function go() {
     console.log("Dx", dx);
 
 
-    var dy = speedY * ty + 0.5 * (gravity * Math.pow(ty, 2));
-
+    var dy =  speedY * ty + 0.5 * (gravity * Math.pow(ty, 2));
+    
     console.log("Dy", dy);
 
     var factor = dx / 10;
@@ -50,6 +78,7 @@ function go() {
         data: {
             labels: [],
             datasets: [{
+                label: "Tempo X Distancia",
                 data: []
             }]
         }
@@ -59,6 +88,7 @@ function go() {
         data: {
             labels: [],
             datasets: [{
+                label: "Altitude X Tempo",
                 data: []
             }]
         }
@@ -68,6 +98,7 @@ function go() {
         data: {
             labels: [],
             datasets: [{
+                label: "Altura X Distancia",
                 data: []
             }]
         }
@@ -85,18 +116,18 @@ function go() {
         setTimeout(function () {
             timeCfg.data.labels.push(parseInt(i));
             timeCfg.data.datasets.forEach(function (dataset) {
-                dataset.data.push({ x: 0 + speedY * t + 0.5 * gravity * Math.pow(t, 2), y: t });
+                dataset.data.push({ x: height + speedY * t + 0.5 * gravity * Math.pow(t, 2), y: t });
             });
 
             altitudeCfg.data.labels.push(t);
             altitudeCfg.data.datasets.forEach(function (dataset) {
-                dataset.data.push({ x: t, y: 0 + speedY * t + 0.5 * gravity * Math.pow(t, 2) });
+                dataset.data.push({ x: t, y: height + speedY * t + 0.5 * gravity * Math.pow(t, 2) });
             });
 
 
             altitude_distanceCfg.data.labels.push(parseInt(i));
             altitude_distanceCfg.data.datasets.forEach(function (dataset) {
-                dataset.data.push({ x: t, y: 0 + speedY * t + 0.5 * gravity * Math.pow(t, 2) });
+                dataset.data.push({ x: t, y: height + speedY * t + 0.5 * gravity * Math.pow(t, 2) });
             });
 
             time.update();
