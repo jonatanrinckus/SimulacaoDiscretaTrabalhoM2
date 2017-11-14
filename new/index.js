@@ -19,8 +19,14 @@ function go() {
     speed = parseFloat($("#speed").val());
     gravity = parseFloat($("#gravity").val());
     height = parseFloat($("#height").val());
-    if(angle <= 0){
-        alert("Angle cant be negative");
+
+    if(speed <= 0 || speed >=9000){
+        alert("Too slow or too fast");
+        return;
+    }
+
+    if(angle <= 0 || angle >=90){
+        alert("Angle cant be negative or greater than 89");
         return;
     }
 
