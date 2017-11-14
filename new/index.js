@@ -144,7 +144,7 @@ function go() {
 
     setTimeout(function () {
         $("label#distance").text("Distancia: " + parseFloat(dx).toFixed(2) + " metros");
-        $("label#height").text("Altitude: " + parseFloat(dy).toFixed(2) + " metros");
+        $("label#height").text("Altitude: " + parseFloat(dy+height).toFixed(2) + " metros");
         $("label#time").text("Tempo: " + parseFloat(tx).toFixed(2) + " segundos");
     }, tx * $("#graph_speed").val());
 
